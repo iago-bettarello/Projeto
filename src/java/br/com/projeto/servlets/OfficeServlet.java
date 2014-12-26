@@ -9,7 +9,6 @@ import br.com.projeto.commands.Command;
 import br.com.projeto.commands.LoginCommand;
 import br.com.projeto.commands.LogoutCommand;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
