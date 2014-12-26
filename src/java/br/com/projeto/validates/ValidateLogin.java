@@ -58,17 +58,4 @@ public class ValidateLogin {
             }
         }
     }
-    
-    public static boolean isLogged(HttpServletRequest req){
-        
-        if (req.getSession(false) != null) {
-            if (!req.getSession(false).getAttribute("usuario").equals("") || req.getSession(false).getAttribute("usuario") != null) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
 }

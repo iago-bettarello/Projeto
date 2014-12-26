@@ -17,20 +17,31 @@ public class LoginCommand implements Command {
 
     private UsuarioPojo up;
     private String pagina;
-    
+
     @Override
     public String execute(HttpServletRequest request) {
-        pagina = "lcoffice/comum/login.jsp";
-        up = new UsuarioPojo();
-        
-        up.setUsuario(request.getParameter("usuario"));
-        up.setSenha(request.getParameter("senha"));
-        
-        if (new ValidateLogin().login(up, request)) {
+        if (isLogged(request) == false) {
+            pagina = "lcoffice/comum/login.jsp";
+            up = new UsuarioPojo();
+
+            up.setUsuario(request.getParameter("usuario"));
+            up.setSenha(request.getParameter("senha"));
+
+            if (new ValidateLogin().login(up, request)) {
+                pagina = "lcoffice/comum/home.jsp";
+            }
+        } else {
             pagina = "lcoffice/comum/home.jsp";
         }
-        
         return pagina;
     }
-    
+
+    public static boolean isLogged(HttpServletRequest req) {
+
+        if (req.getSession(false) != null) {
+            return req.getSession(false).getAttribute("usuario") != null && !"".equals(req.getSession(false).getAttribute("usuario"));
+        } else {
+            return false;
+        }
+    }
 }
